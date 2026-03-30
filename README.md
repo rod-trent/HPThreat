@@ -4,6 +4,8 @@
 
 Deploy and monitor custom honeypots, capture attacker TTPs and IOCs, correlate with live threat feeds, and auto-generate Sigma detection rules — all through natural conversation with Claude.
 
+Blog Docs: https://rodtrent.substack.com/p/introducing-hpthreat-i-built-an-mcp
+
 ## What It Does
 
 | Capability | Details |
