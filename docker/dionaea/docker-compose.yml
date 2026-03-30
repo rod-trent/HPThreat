@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  dionaea:
+    image: dinotools/dionaea:latest
+    container_name: ${HONEYPOT_NAME:-dionaea-default}
+    ports:
+      - "${FTP_PORT:-21}:21"
+      - "${HTTP_PORT:-8080}:80"
+      - "${HTTPS_PORT:-8443}:443"
+      - "${SMB_PORT:-8445}:445"
+      - "${MSSQL_PORT:-11433}:1433"
+      - "${MYSQL_PORT:-13306}:3306"
+      - "${SIP_PORT:-15060}:5060/udp"
+    volumes:
+      - ../../data/logs/dionaea/${HONEYPOT_NAME:-dionaea-default}:/opt/dionaea/var/log/dionaea
+    restart: unless-stopped
+    networks:
+      - honeypot_net
+    labels:
+      - "hpthreat.type=dionaea"
+      - "hpthreat.managed=true"
+
+networks:
+  honeypot_net:
+    driver: bridge
+    name: hpthreat_net

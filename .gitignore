@@ -1,0 +1,32 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Data (logs and reports are runtime artifacts)
+data/logs/
+data/reports/
+data/cache/
+data/state.json
+
+# Keep directory structure
+!data/.gitkeep
+!data/logs/.gitkeep
+!data/reports/.gitkeep
+!data/cache/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local settings (permissions, not for sharing)
+.claude/settings.local.json

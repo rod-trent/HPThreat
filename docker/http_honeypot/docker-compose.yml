@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  http_honeypot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: honeypot-http:local
+    container_name: ${HONEYPOT_NAME:-http-default}
+    ports:
+      - "${HTTP_PORT:-8080}:8080"
+    volumes:
+      - ../../data/logs/http/${HONEYPOT_NAME:-http-default}:/app/logs
+    environment:
+      - HONEYPOT_NAME=${HONEYPOT_NAME:-http-default}
+    restart: unless-stopped
+    networks:
+      - honeypot_net
+    labels:
+      - "hpthreat.type=http"
+      - "hpthreat.managed=true"
+
+networks:
+  honeypot_net:
+    driver: bridge
+    name: hpthreat_net

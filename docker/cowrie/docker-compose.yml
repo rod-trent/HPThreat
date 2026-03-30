@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  cowrie:
+    image: cowrie/cowrie:latest
+    container_name: ${HONEYPOT_NAME:-cowrie-default}
+    ports:
+      - "${SSH_PORT:-2222}:2222"
+      - "${TELNET_PORT:-2223}:2223"
+    volumes:
+      - ../../data/logs/cowrie/${HONEYPOT_NAME:-cowrie-default}:/cowrie/var/log/cowrie
+      - ./cowrie.cfg:/cowrie/etc/cowrie.cfg:ro
+    environment:
+      - COWRIE_HOSTNAME=${COWRIE_HOSTNAME:-svr04}
+    restart: unless-stopped
+    networks:
+      - honeypot_net
+    labels:
+      - "hpthreat.type=cowrie"
+      - "hpthreat.managed=true"
+
+networks:
+  honeypot_net:
+    driver: bridge
+    name: hpthreat_net

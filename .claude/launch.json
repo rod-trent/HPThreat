@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "HPThreat MCP Server (HTTP)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["server.py", "--transport", "streamable-http", "--host", "127.0.0.1", "--port", "8000"],
+      "port": 8000
+    },
+    {
+      "name": "HTTP Honeypot (Flask Decoy)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["docker/http_honeypot/app.py"],
+      "port": 8080
+    },
+    {
+      "name": "Cowrie SSH Honeypot (Docker)",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "-f", "docker/cowrie/docker-compose.yml", "up"],
+      "port": 2222
+    },
+    {
+      "name": "Dionaea Multi-Protocol Honeypot (Docker)",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "-f", "docker/dionaea/docker-compose.yml", "up"],
+      "port": 8445
+    }
+  ]
+}
